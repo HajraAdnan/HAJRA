@@ -1,0 +1,38 @@
+CREATE DATABASE task2;
+USE task2;
+
+DROP TABLE Students;
+
+CREATE TABLE Students (
+    studentID INT PRIMARY KEY,
+    name VARCHAR(100),
+    age INT,
+    PhoneNumber VARCHAR(15)
+);
+
+INSERT INTO Students (studentID, name, age, PhoneNumber)
+VALUES (1, 'Ali', 21, '03001234567');
+
+INSERT INTO Students (studentID, name, age, PhoneNumber)
+VALUES (2, 'Sara', 19, '03019876543');
+
+INSERT INTO Students (studentID, name, age, PhoneNumber)
+VALUES (3, 'Ahmed', 17, '03017654321');
+
+UPDATE Students
+SET age = 22
+WHERE name = 'Ali';
+
+DELETE FROM Students
+WHERE age < 18;
+
+
+
+SELECT * FROM Students;
+
+SELECT * FROM Students
+WHERE name = 'Ali';
+
+SELECT * FROM Students
+WHERE age > 18;
+
