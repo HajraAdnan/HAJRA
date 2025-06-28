@@ -1,0 +1,15 @@
+CREATE DATABASE task1;
+USE task1;
+
+CREATE TABLE Students (
+    studentID INT,
+    name VARCHAR(100),
+    age INT,
+    course VARCHAR(100)
+);
+
+ALTER TABLE Students
+ADD PhoneNumber VARCHAR(15);
+
+ALTER TABLE Students
+DROP COLUMN course;

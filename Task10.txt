@@ -1,0 +1,30 @@
+CREATE DATABASE Task10;
+USE Task10;
+
+
+CREATE TABLE account (
+    account_id INT PRIMARY KEY,
+    account_holder TEXT,
+    balance DECIMAL(10, 2)
+);
+
+
+INSERT INTO account (account_id, account_holder, balance) VALUES
+(1, 'Alice', 2000.00),
+(2, 'Bob', 1000.00);
+
+
+
+BEGIN;
+
+-- Debit Rs. 500 from account 1
+UPDATE account
+SET balance = balance - 500
+WHERE account_id = 1;
+
+-- Credit Rs. 500 to account 2
+UPDATE account
+SET balance = balance + 500
+WHERE account_id = 2;
+
+END;

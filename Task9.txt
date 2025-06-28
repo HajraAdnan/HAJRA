@@ -1,0 +1,48 @@
+CREATE DATABASE Task09;
+USE Task09;
+
+IF OBJECT_ID('InsertStudent', 'P') IS NOT NULL
+    DROP PROCEDURE InsertStudent;
+GO
+
+IF OBJECT_ID('GetStudentsByDepartment', 'P') IS NOT NULL
+    DROP PROCEDURE GetStudentsByDepartment;
+GO
+
+IF OBJECT_ID('UpdateStudentAge', 'P') IS NOT NULL
+    DROP PROCEDURE UpdateStudentAge;
+GO
+
+CREATE PROCEDURE InsertStudent
+    @StudentID INT,
+    @FirstName VARCHAR(50),
+    @LastName VARCHAR(50),
+    @Age INT,
+    @DepartmentID INT
+AS
+BEGIN
+    INSERT INTO Students (StudentID, FirstName, LastName, Age, DepartmentID)
+    VALUES (@StudentID, @FirstName, @LastName, @Age, @DepartmentID);
+END;
+GO
+
+CREATE PROCEDURE GetStudentsByDepartment
+    @DepartmentID INT
+AS
+BEGIN
+    SELECT *
+    FROM Students
+    WHERE DepartmentID = @DepartmentID;
+END;
+GO
+
+CREATE PROCEDURE UpdateStudentAge
+    @StudentID INT,
+    @NewAge INT
+AS
+BEGIN
+    UPDATE Students
+    SET Age = @NewAge
+    WHERE StudentID = @StudentID;
+END;
+GO

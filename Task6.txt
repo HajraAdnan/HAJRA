@@ -1,0 +1,52 @@
+CREATE DATABASE Task6;
+USE Task6;
+
+
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(100),
+    course_id INT
+);
+
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100)
+);
+
+
+
+INSERT INTO Students (student_id, student_name, course_id) VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', NULL),
+(4, 'David', 104);
+
+
+
+INSERT INTO Courses (course_id, course_name) VALUES
+(101, 'Mathematics'),
+(102, 'Physics'),
+(103, 'Chemistry'),
+(105, 'Biology');
+
+
+SELECT 
+    s.student_name, 
+    c.course_name
+FROM 
+    Students s
+INNER JOIN 
+    Courses c 
+ON 
+    s.course_id = c.course_id;
+
+
+	SELECT 
+    s.student_name, 
+    c.course_name
+FROM 
+    Students s
+FULL OUTER JOIN 
+    Courses c 
+ON 
+    s.course_id = c.course_id;

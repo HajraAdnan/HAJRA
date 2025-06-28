@@ -1,0 +1,49 @@
+CREATE DATABASE Task12;
+USE Task12;
+
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name NVARCHAR(100),
+    age INT
+);
+
+
+CREATE TABLE DeletedStudents (
+    student_id INT,
+    name NVARCHAR(100),
+    age INT,
+    deleted_at DATETIME DEFAULT GETDATE()
+);
+
+
+CREATE TRIGGER 
+trg_LogStudentDeletion
+ON 
+students
+AFTER DELETE
+AS
+BEGIN
+    INSERT INTO DeletedStudents (student_id, name, age)
+    SELECT student_id, name, age
+    FROM DELETED;
+END;
+
+
+CREATE TRIGGER trg_PreventUnderageInsert
+ON 
+students
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM INSERTED WHERE age < 16)
+    BEGIN
+        RAISERROR('Cannot insert student with age less than 16.', 16, 1);
+        RETURN;
+    END
+
+    -- If all rows are valid, insert them
+    INSERT INTO students (student_id, name, age)
+    SELECT student_id, name, age
+    FROM INSERTED;
+END;

@@ -1,0 +1,15 @@
+﻿CREATE DATABASE task4;
+USE task4;
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name NVARCHAR(100),
+    Price DECIMAL(10, 2),
+    ManufactureDate DATE
+);
+
+-- VARCHAR 
+DECLARE @name VARCHAR(50) = 'Laptop';
+
+-- NVARCHAR 
+DECLARE @productName NVARCHAR(50) = N'لائپ ٹاپ';

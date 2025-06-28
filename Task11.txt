@@ -1,0 +1,38 @@
+CREATE DATABASE Task11;
+USE Task11;
+
+
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    name NVARCHAR(100)
+);
+
+
+INSERT INTO students (student_id, name) VALUES
+(1, 'Alice'),
+(2, 'Bob'),
+(3, 'Charlie');
+
+
+DECLARE @counter INT = 1;
+DECLARE @total INT;
+DECLARE @studentName NVARCHAR(100);
+
+-- Get total number of students
+SELECT @total = COUNT(*) FROM students;
+
+WHILE @counter <= @total
+BEGIN
+    -- Get the student name based on row number
+    SELECT @studentName = name
+    FROM (
+        SELECT name, ROW_NUMBER() OVER (ORDER BY student_id) AS row_num
+        FROM students
+    ) AS numbered_students
+    WHERE row_num = @counter;
+
+    PRINT @studentName;
+
+    SET @counter = @counter + 1;
+END;
+
